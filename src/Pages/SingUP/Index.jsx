@@ -3,8 +3,9 @@ import lib from "../../lib/lib";
 
 const SignUP = () => {
     const data = lib.signUpdata();
-    const [count, setCount] = useState(1);
     const [email, setEmail] = useState("");
+    const [fullName,setFullName] = useState("");
+    const [password,setPassword] = useState("");
 
     // handleinput function
     const handleinput = (e) => {
@@ -50,11 +51,7 @@ const SignUP = () => {
                     </div>
                 </div>
                 <div className="w-1/2 bg-yellow-500 h-screen flex flex-col justify-center items-center">
-                    <div className="flex items-center gap-4">
-                        <button className='px-4 py-2 bg-mainColor text-white text-lg rounded-3xl cursor-pointer' onClick={handleplus}>+</button>
-                        <p className="text-2xl font-bold">{count}</p>
-                        <button className='px-4 py-2 bg-mainColor text-white text-lg rounded-3xl cursor-pointer' onClick={handleminus}>-</button>
-                    </div>
+                  
                 </div>
             </div>
         </div>
