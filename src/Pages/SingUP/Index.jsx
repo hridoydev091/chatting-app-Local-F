@@ -3,11 +3,16 @@ import lib from "../../lib/lib";
 
 const SignUP = () => {
     const data = lib.signUpdata();
-
     // useState দিয়ে আলাদা আলাদা state
     const [email, setEmail] = useState("");
     const [fullName, setFullName] = useState("");
     const [password, setPassword] = useState("");
+
+    //error state
+    const [emailError,setEmaillError] = useState("");
+    const [fullNameError,setFullNameError] = useState("");
+    const [passwordError,setPasswordError ] = useState("");
+
 
     // handleChange function
     const handleChange = (event) => {
@@ -21,8 +26,28 @@ const SignUP = () => {
             setPassword(value);
         }
     };
-    console.log(fullName,email,password);
-    
+
+    /** 
+     *  todo : handleSignUp funtion implement
+     ** motive :
+     * params :()
+     * return null
+     */
+
+     const handleSignUp = () =>{
+        alert("sing up");
+        if(!fullName){
+            setFullNameError ("Fullname Missing");
+        }
+        else if (!email){
+            setEmaillError("Missing Email !");
+        }
+        else if (!password){
+            setPasswordError ("password Missng !");
+        } else{
+            alert ("fine");
+        }
+     };
 
     return (
         <div>
@@ -48,7 +73,7 @@ const SignUP = () => {
                                     />
                                 </div>
                             ))}
-                            <button className="px-7 py-2 bg-mainColor text-white text-lg rounded-3xl cursor-pointer">
+                            <button onClick={handleSignUp} className="px-7 py-2 bg-mainColor text-white text-lg rounded-3xl cursor-pointer">
                                 Sign Up
                             </button>
                         </form>
