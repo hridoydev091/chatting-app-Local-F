@@ -3,51 +3,54 @@ import lib from "../../lib/lib";
 
 const SignUP = () => {
     const data = lib.signUpdata();
-    // useState দিয়ে আলাদা আলাদা state
+    
+    // State
     const [email, setEmail] = useState("");
     const [fullName, setFullName] = useState("");
     const [password, setPassword] = useState("");
 
-    //error state
-    const [emailError,setEmaillError] = useState("");
-    const [fullNameError,setFullNameError] = useState("");
-    const [passwordError,setPasswordError ] = useState("");
+    // Error State
+    const [emailError, setEmailError] = useState("");
+    const [fullNameError, setFullNameError] = useState("");
+    const [passwordError, setPasswordError] = useState("");
 
-
-    // handleChange function
+    // Handle Input Change
     const handleChange = (event) => {
         const { name, value } = event.target;
 
         if (name === "email") {
             setEmail(value);
+            setEmailError("");
         } else if (name === "fullName") {
             setFullName(value);
+            setFullNameError("");
         } else if (name === "password") {
             setPassword(value);
+            setPasswordError("");
         }
     };
 
-    /** 
-     *  todo : handleSignUp funtion implement
-     ** motive :
-     * params :()
-     * return null
-     */
+    // Handle Sign Up
+    const handleSignUp = () => {
+        let isValid = true;
+        
+        if (!fullName) {
+            setFullNameError("Full Name is required");
+            isValid = false;
+        }
+        if (!email) {
+            setEmailError("Email is required");
+            isValid = false;
+        }
+        if (!password) {
+            setPasswordError("Password is required");
+            isValid = false;
+        }
 
-     const handleSignUp = () =>{
-        alert("sing up");
-        if(!fullName){
-            setFullNameError ("Fullname Missing");
+        if (isValid) {
+            alert("Sign Up Successful");
         }
-        else if (!email){
-            setEmaillError("Missing Email !");
-        }
-        else if (!password){
-            setPasswordError ("password Missng !");
-        } else{
-            alert ("fine");
-        }
-     };
+    };
 
     return (
         <div>
@@ -71,6 +74,9 @@ const SignUP = () => {
                                         onChange={handleChange}
                                         className="border border-gray-500 py-1 px-2"
                                     />
+                                    {name === "email" && emailError && <span className="text-red-500">{emailError}</span>}
+                                    {name === "fullName" && fullNameError && <span className="text-red-500">{fullNameError}</span>}
+                                    {name === "password" && passwordError && <span className="text-red-500">{passwordError}</span>}
                                 </div>
                             ))}
                             <button onClick={handleSignUp} className="px-7 py-2 bg-mainColor text-white text-lg rounded-3xl cursor-pointer">
