@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState } from "react"; 
 import lib from "../../lib/lib";
 import img from "../../assets/this.jpg";
+import { FaEyeSlash, FaRegEye } from "react-icons/fa";
+
 
 const SignUP = () => {
   const data = lib.signUpdata();
@@ -10,35 +12,47 @@ const SignUP = () => {
   const [password, setPassword] = useState("");
 
   //error state
-  const [emailError, setEmailError] = useState(""); // Corrected spelling mistake
+  const [emailError, setEmailError] = useState("");
   const [fullNameError, setFullNameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [eye,seteye] = useState(false);
 
-  // handleChange function
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-
-    if (name === "email") {
-      setEmail(value);
-    } else if (name === "fullname") {
-      setFullName(value);
-    } else if (name === "password") {
-      setPassword(value);
-    }
-  };
-
+  //handleSignUp function
   const handleSignUp = () => {
-    alert("sign up");
-    if (!fullName) {
-      setFullNameError("Full name missing");
-    } else if (!email) {
-      setEmailError("Missing Email!"); // Corrected spelling mistake
+    if (!email) {
+        setEmailError("Email Missing");
+    } else if (!fullName) {
+        setEmailError("")
+        setFullName("fullname Missing !");
     } else if (!password) {
-      setPasswordError("Password missing!");
+        setEmailError("");
+        setFullNameError("");
+        setPasswordError("password Missing !");
     } else {
+        setPasswordError("")
       alert("Fine");
     }
   };
+
+  // handleChange function
+
+  const handlepasswword = (event) => {
+    setPassword(event.target.value);
+  };
+
+  const handleFullname = (event) => {
+    setFullName(event.target.value);
+  };
+
+  const handleEmail = (event) => {
+    setEmail(event.target.value);
+  };
+  // handleEye
+  const handleEye = () =>{
+    seteye(! eye);
+  }
+
+  console.log(passwordError, fullNameError, emailError);
 
   return (
     <div>
@@ -54,48 +68,65 @@ const SignUP = () => {
               className="mt-10"
               onSubmit={(e) => e.preventDefault()}
             >
-              {data?.map(({ name, id, required }) => (
-                <div
-                  key={id}
-                  className="flex flex-col gap-y-1 items-start mb-5"
-                >
-                  <label htmlFor={name}>
-                    {`Fill Up The ${name}`}
-                    {required && <span className="text-red-500">*</span>}
+                <div className="flex flex-col gap-y-1 items-start mb-5">
+                  <label htmlFor="email">
+                    {`Fill Up The email`}
+                     {<span className="text-red-500">*</span>}
                   </label>
                   <input
-                    type={
-                      name === "email"
-                        ? "email"
-                        : name === "password"
-                        ? "password"
-                        : "text"
-                    }
-                    placeholder={`Enter your ${name}`}
-                    name={name}
-                    value={
-                      name === "email"
-                        ? email
-                        : name === "fullname"
-                        ? fullName
-                        : password
-                    }
-                    onChange={handleChange}
+                    type={"email"}
+                    placeholder={"email"}
+                    name={"email"}
+                    value={email}
+                    onChange={handleEmail}
                     className="border border-gray-500 py-1 px-2"
                   />
-                  {email == "email" && name == "email" ? (
-                    <span className="text-red-500">{emailError}</span> // Corrected error display
-                  ) : fullName == "" && name == "fullName" ? (
-                    <span className="text-red-500">{fullNameError}</span>
-                  ) : password == "" && name == "password" ? (
-                    <span className="text-red-500">{passwordError}</span>
-                  ) : (
-                    ""
-                  )}
+                {emailError &&(
+                    <span className="text-red-500">{emailError}</span>
+                )}
                 </div>
-              ))}
-              <button
-                onClick={handleSignUp}
+
+                <div className="flex flex-col gap-y-1 items-start mb-5">
+                  <label htmlFor="email">
+                    {`Fill Up The FullName`}
+                     {<span className="text-red-500">*</span>}
+                  </label>
+                  <input
+                    type={"text"}
+                    placeholder={"fullName"}
+                    name={"fullName"}
+                    value={fullName}
+                    onChange={handleFullname}
+                    className="border border-gray-500 py-1 px-2"
+                  />
+                  {fullNameError &&(
+                    <span className="text-red-500">{fullNameError}</span>
+                )}
+                </div>
+
+                <div className="flex flex-col gap-y-1 items-start mb-5 relative">
+                  <label htmlFor="email">
+                    {`Fill Up The email`}
+                     {<span className="text-red-500">*</span>}
+                  </label>
+                  <input
+                    type= {eye ?"text":"password"}
+                    placeholder={"password"}
+                    name={"email"}
+                    value={password}
+                    onChange={handlepasswword}
+                    className="border border-gray-500 py-1 px-2"
+                  />
+                  <span className="absolute right-[20%] top-[60%] cursor-pointer" onClick={handleEye}>
+                    {eye ? <FaRegEye /> : <FaEyeSlash />}
+                  
+                  </span>
+                  {passwordError &&(
+                    <span className="text-red-500">{passwordError}</span>
+                )}
+                </div>
+              <button 
+              onClick={handleSignUp}
                 className="px-7 py-2 bg-mainColor text-white text-lg rounded-3xl cursor-pointer"
               >
                 Sign Up
