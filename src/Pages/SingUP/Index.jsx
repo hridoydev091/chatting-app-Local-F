@@ -29,6 +29,8 @@ const SignUP = () => {
         setFullNameError("");
         setPasswordError("password Missing !");
     } else {
+      setEmailError("");
+      setFullNameError("");
         setPasswordError("")
       alert("Fine");
     }
