@@ -32,7 +32,8 @@ const SignUP = () => {
       setEmailError("");
       setFullNameError("");
         setPasswordError("")
-      alert("Fine");
+      console.log(email,fullName,password);
+      
     }
   };
 

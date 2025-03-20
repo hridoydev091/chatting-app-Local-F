@@ -1,3 +1,4 @@
+import { Database } from 'firebase/database'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
