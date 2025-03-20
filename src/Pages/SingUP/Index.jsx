@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import lib from "../../lib/lib";
 import img from "../../assets/this.jpg";
 import { FaEyeSlash, FaRegEye } from "react-icons/fa";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+
 
 
 const SignUP = () => {
+  const auth =getAuth();
   const data = lib.signUpdata();
   // useState দিয়ে আলাদা আলাদা state
   const [email, setEmail] = useState("");
@@ -33,6 +36,12 @@ const SignUP = () => {
       setFullNameError("");
         setPasswordError("")
       console.log(email,fullName,password);
+      createUserWithEmailAndPassword(auth, email, password).then((userinfo) =>{
+        console.log("user Created sucessfull",userinfo);
+      }).catch((err) =>{
+        console.log(`error from createUserWithEmailAndPassword function ${err}`);
+      });
+
       
     }
   };
