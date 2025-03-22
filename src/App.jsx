@@ -1,12 +1,13 @@
-import React from 'react'
-import SignUP from './Pages/SingUP/Index'
+import React from "react";
+import SignUP from "./Pages/SingUP";
+
 
 const App = () => {
   return (
-    <div className=''>
+    <div>
       <SignUP />
-      </div>
-  )
-}
+    </div>
+  );
+};
 
-export default App
+export default App;
